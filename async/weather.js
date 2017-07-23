@@ -1,7 +1,13 @@
 var request = require('request');
-var url = 'http://api.openweathermap.org/data/2.5/weather?appid=76bb44bc07dd23722adae82dca3935a2&q=Santiago&units=metric';
+module.exports = function (location, callback) {
 
-module.exports = function (callback) {
+    if(!location){
+        return callback('No location provided!');
+    }
+    
+    var encodedLocation = encodeURIComponent(location);
+    var url = 'http://api.openweathermap.org/data/2.5/weather?appid=76bb44bc07dd23722adae82dca3935a2&q='+ encodedLocation +'&units=metric';
+
     request(
     {
         url:    url,
